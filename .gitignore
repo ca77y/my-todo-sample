@@ -1,0 +1,14 @@
+# Eclipse
+*.pydevproject
+.project
+.metadata
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea
+
+# Emacs
+\#*\#
+.#*

@@ -3,11 +3,11 @@
 angular.module('todoApp')
   .controller 'NavbarCtrl', ($scope, $location, Auth) ->
     $scope.menu = [
-      title: 'Home'
-      link: '/'
-    , 
       title: 'Settings'
       link: '/settings'
+    ,
+      title: 'Todo'
+      link: '/todo'
     ]
     
     $scope.logout = ->

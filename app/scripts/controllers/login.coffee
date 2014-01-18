@@ -7,15 +7,15 @@ angular.module('todoApp')
 
     $scope.login = (form) ->
       $scope.submitted = true
-      
+
       if form.$valid
         Auth.login(
           email: $scope.user.email
           password: $scope.user.password
         )
         .then ->
-          # Logged in, redirect to home
-          $location.path '/'
+          # Logged in, redirect to todo
+          $location.path '/todo'
         .catch (err) ->
           err = err.data;
           $scope.errors.other = err.message;

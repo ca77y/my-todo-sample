@@ -22,6 +22,9 @@ angular.module('todoApp', [
         templateUrl: 'partials/settings'
         controller: 'SettingsCtrl'
         authenticate: true
+      .when '/todo',
+        templateUrl: 'partials/todo'
+        controller: 'TodoCtrl'
       .otherwise
         redirectTo: '/'
 

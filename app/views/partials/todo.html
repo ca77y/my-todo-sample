@@ -1,1 +1,44 @@
-<p>This is the todo view.</p>
+<section id="todoapp">
+    <header id="todoTitle">
+        <h2>{{ currentUser.name }}'s Todo list</h2>
+
+        <div id="header row">
+            <div class="col-md-2">Completed</div>
+            <div class="col-md-4">Name</div>
+            <div class="col-md-3">Due date</div>
+            <div class="col-md-3">Priority</div>
+        </div>
+
+        <form id="newTodoForm" role="form" class="form-inline">
+            <div class="form-group col-md-4 col-md-offset-2">
+                <input id="newTodoName" type="text" class="form-control" placeholder="Enter todo name"/>
+            </div>
+            <div class="form-group col-md-3">
+                <input id="newTodoDueDate" type="date" class="form-control"/>
+            </div>
+            <div class="form-group col-md-3">
+                <input id="newTodoPriority" type="number" class="form-control" placeholder="Enter priority"/>
+            </div>
+        </form>
+    </header>
+    <section id="todoList">
+        <ul class="list-unstyled">
+            <li ng-repeat="todo in model.todos">
+                <div class="row">
+                    <div class="col-md-2">
+                        <input type="checkbox"/>
+                    </div>
+                    <div class="col-md-4">
+                        {{ todo.name }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ todo.dueDate }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ todo.priority }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</section>

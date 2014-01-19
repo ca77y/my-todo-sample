@@ -1,0 +1,9 @@
+#todoapp h1 {
+    font-size: 40px;
+}
+
+#todo-list li .toggle {
+    outline: none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}

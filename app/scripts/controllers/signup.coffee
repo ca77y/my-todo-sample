@@ -14,8 +14,8 @@ angular.module('todoApp')
           email: $scope.user.email
           password: $scope.user.password
         ).then( ->
-          # Account created, redirect to home
-          $location.path '/'
+          # Account created, redirect to todos
+          $location.path '/todo'
         ).catch( (err) ->
           err = err.data
           $scope.errors = {}

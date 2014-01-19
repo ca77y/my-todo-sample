@@ -11,7 +11,6 @@ angular.module('todoApp', [
       .when '/',
         templateUrl: 'partials/main'
         controller: 'MainCtrl'
-      
       .when '/login',
         templateUrl: 'partials/login'
         controller: 'LoginCtrl'
@@ -25,6 +24,7 @@ angular.module('todoApp', [
       .when '/todo',
         templateUrl: 'partials/todo'
         controller: 'TodoCtrl'
+        authenticate: true
       .otherwise
         redirectTo: '/'
 
@@ -39,7 +39,6 @@ angular.module('todoApp', [
           $q.reject response
     ]
   .run ($rootScope, $location, Auth) ->
-    
     # Redirect to login if route requires auth and you're not logged in
     $rootScope.$on '$routeChangeStart', (event, next) ->
       $location.path '/login'  if next.authenticate and not Auth.isLoggedIn()

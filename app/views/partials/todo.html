@@ -1,36 +1,32 @@
 <div class="container" ng-cloak>
     <section id="todoapp">
         <header id="header">
-            <form id="todo-form" role="form">
+            <form id="todo-form" role="form" ng-submit="addTodo()">
                 <h1>What are you planning to do?</h1>
 
-                <input id="new-todo" type="text" autofocus/>
+                <input id="new-todo" type="text" ng-model="model.newTodo" autofocus required/>
             </form>
         </header>
 
         <section id="main">
             <div class="todo-list">
                 <ul id=todo-list>
-                    <li class="done">
+                    <li ng-repeat="todo in model.todos" ng-class="{completed: todo.completed}">
                         <div class="view">
-                            <input class="toggle" type="checkbox">
-                            <label>test todo 1</label>
-                            <button class="destroy"></button>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="view">
-                            <input class="toggle" type="checkbox">
-                            <label>test todo 2</label>
-                            <button class="destroy"></button>
+                            <input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="updateTodo(todo)">
+                            <label ng-bind="todo.name"></label>
+                            <button class="destroy" ng-click="deleteTodo(todo)"></button>
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <footer id="footer">
-            <span id="todo-count"><strong>3</strong> items left</span>
+        <footer id="footer" ng-show="model.remainingCount">
+            <span id="todo-count">
+                <strong ng-bind="model.remainingCount"></strong>
+                <ng-pluralize count="model.remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+            </span>
         </footer>
     </section>
 </div>

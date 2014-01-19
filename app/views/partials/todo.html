@@ -13,8 +13,17 @@
                 <ul id=todo-list>
                     <li ng-repeat="todo in model.todos" ng-class="{completed: todo.completed}">
                         <div class="view">
-                            <input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="updateTodo(todo)">
+                            <input class="toggle" type="checkbox" ng-model="todo.completed"
+                                   ng-change="updateTodo(todo)">
                             <label ng-bind="todo.name"></label>
+                            <div class="priority">
+                                <span class="label"
+                                      ng-class="{'label-primary': todo.priority < 4, 'label-warning': todo.priority > 3 && todo.priority < 7, 'label-danger': todo.priority > 6}">
+                                    <button class="btn btn-sm" ng-click="decreasePriority(todo)"><i class="glyphicon glyphicon-chevron-down"></i></button>
+                                    {{ todo.priority }}
+                                    <button class="btn btn-sm" ng-click="increasePriority(todo)"><i class="glyphicon glyphicon-chevron-up"></i></button>
+                                </span>
+                            </div>
                             <button class="destroy" ng-click="deleteTodo(todo)"></button>
                         </div>
                     </li>
@@ -25,7 +34,8 @@
         <footer id="footer" ng-show="model.remainingCount">
             <span id="todo-count">
                 <strong ng-bind="model.remainingCount"></strong>
-                <ng-pluralize count="model.remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+                <ng-pluralize count="model.remainingCount"
+                              when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
             </span>
         </footer>
     </section>

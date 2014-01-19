@@ -7,3 +7,31 @@
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
 }
+
+#todo-list li label {
+    word-break: keep-all;
+    padding: 15px 100px 15px 15px;
+}
+
+#todo-list li .priority {
+    position: absolute;
+    top: 0;
+    right: 50px;
+    bottom: 0;
+    height: 25px;
+    margin: auto 0;
+}
+
+#todo-list li .priority button {
+    display: none;
+    padding: 0;
+    margin: 0;
+    font-size: 8px;
+    outline: none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+#todo-list li .priority:hover button {
+    display: inline-block;
+}

@@ -29,3 +29,13 @@ angular.module('todoApp')
         idx = $scope.model.todos.indexOf todo
         if idx > -1
           $scope.model.todos.splice idx, 1
+
+    $scope.increasePriority = (todo) ->
+      if todo.priority < 9
+        todo.priority++
+        $scope.updateTodo todo
+
+    $scope.decreasePriority = (todo) ->
+      if todo.priority > 1
+        todo.priority--
+        $scope.updateTodo todo

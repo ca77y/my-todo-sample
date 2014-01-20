@@ -86,5 +86,8 @@ angular.module('todoApp')
     $scope.saveEdit = (todo) ->
       $scope.model.editTodo = null
       $scope.model.originalTodo = null
-      $scope.updateTodo todo
+      if todo.name
+        $scope.updateTodo todo
+      else
+        $scope.deleteTodo todo
   ]

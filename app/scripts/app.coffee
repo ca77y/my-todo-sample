@@ -1,10 +1,11 @@
 'use strict'
 
 angular.module('todoApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
+  'ngCookies'
+  'ngResource'
+  'ngSanitize'
   'ngRoute'
+  'ui.bootstrap'
 ])
   .config ($routeProvider, $locationProvider, $httpProvider) ->
     $routeProvider

@@ -9,9 +9,7 @@ angular.module('todoApp')
       minDate: new Date
       format: 'yyyy-MM-dd'
       opened: false
-      options:
-        'year-format': "'yy'"
-        'starting-day': 1
+      todos: {}
 
     $scope.sorting =
       date:
@@ -26,7 +24,9 @@ angular.module('todoApp')
         x + y
 
     $http.get('/api/todos').success (res) ->
-      $scope.model.todos = res.todos
+      $scope.model.todos = res.todos.map (item) ->
+        item.dueDate = new Date(item.dueDate)
+        item
       $scope.model.remainingCount = getRemainingCount res.todos
 
     $scope.addTodo = ->
@@ -58,10 +58,10 @@ angular.module('todoApp')
         todo.priority--
         $scope.updateTodo todo
 
-    $scope.openDatepicker = ($event) ->
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.open = true
+    $scope.openDatepicker = ($event, todo) ->
+      $event.preventDefault()
+      $event.stopPropagation()
+      $scope.datepicker.todos[todo._id] = true
 
     $scope.sortByDate = ->
       $scope.sorting.date.ascending = !$scope.sorting.date.ascending

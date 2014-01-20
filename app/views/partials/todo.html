@@ -2,8 +2,12 @@
     <section id="todoapp">
         <header id="header">
             <div id="sorting">
-                <button class="btn btn-sm due-date" ng-click="sortByDate()"><i class="glyphicon" ng-class="{'glyphicon-chevron-up': sorting.date.ascending, 'glyphicon-chevron-down': !sorting.date.ascending}"></i></button>
-                <button class="btn btn-sm priority" ng-click="sortByPriority()"><i class="glyphicon" ng-class="{'glyphicon-chevron-up': sorting.priority.ascending, 'glyphicon-chevron-down': !sorting.priority.ascending}"></i></button>
+                <button class="btn btn-sm due-date" ng-click="sortByDate()"><i class="glyphicon"
+                                                                               ng-class="{'glyphicon-chevron-up': sorting.date.ascending, 'glyphicon-chevron-down': !sorting.date.ascending}"></i>
+                </button>
+                <button class="btn btn-sm priority" ng-click="sortByPriority()"><i class="glyphicon"
+                                                                                   ng-class="{'glyphicon-chevron-up': sorting.priority.ascending, 'glyphicon-chevron-down': !sorting.priority.ascending}"></i>
+                </button>
             </div>
             <form id="todo-form" role="form" ng-submit="addTodo()">
                 <h1>What are you planning to do?</h1>
@@ -14,27 +18,32 @@
 
         <section id="main">
             <ul id="todo-list">
-                <li ng-repeat="todo in model.todos | orderBy:sorting.predicate:sorting.reverse" ng-class="{completed: todo.completed}">
+                <li ng-repeat="todo in model.todos | orderBy:sorting.predicate:sorting.reverse"
+                    ng-class="{completed: todo.completed}">
                     <div class="view">
                         <input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="updateTodo(todo)">
                         <label ng-bind="todo.name"></label>
                         <div class="due-date">
-                                <span class="label label-default">
-                                    {{ todo.dueDate | date:datepicker.format }}
-                                    <button class="btn btn-sm" ng-click="openDatepicker($event)">
-                                        <i class="glyphicon glyphicon-calendar"></i>
-                                    </button>
+                            <div class="input-group">
+                                <input type="text" class="form-control" datepicker-popup="{{datepicker.format}}"
+                                       ng-model="todo.dueDate" is-open="datepicker.todos[todo._id]"
+                                       min="datepicker.minDate" close-text="Close" ng-disabled="true"
+                                       ng-change="updateTodo(todo)"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" ng-click="openDatepicker($event, todo)"><i
+                                            class="glyphicon glyphicon-calendar"></i></button>
                                 </span>
+                            </div>
                         </div>
                         <div class="priority">
-                                <span class="label"
-                                      ng-class="{'label-primary': todo.priority < 4, 'label-warning': todo.priority > 3 && todo.priority < 7, 'label-danger': todo.priority > 6}">
-                                    <button class="btn btn-sm" ng-click="decreasePriority(todo)"><i
-                                            class="glyphicon glyphicon-chevron-down"></i></button>
-                                    {{ todo.priority }}
-                                    <button class="btn btn-sm" ng-click="increasePriority(todo)"><i
-                                            class="glyphicon glyphicon-chevron-up"></i></button>
-                                </span>
+                            <span class="label"
+                                  ng-class="{'label-primary': todo.priority < 4, 'label-warning': todo.priority > 3 && todo.priority < 7, 'label-danger': todo.priority > 6}">
+                                <button class="btn btn-sm" ng-click="decreasePriority(todo)"><i
+                                        class="glyphicon glyphicon-chevron-down"></i></button>
+                                {{ todo.priority }}
+                                <button class="btn btn-sm" ng-click="increasePriority(todo)"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></button>
+                            </span>
                         </div>
                         <button class="destroy" ng-click="deleteTodo(todo)"></button>
                     </div>

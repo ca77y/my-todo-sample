@@ -1,8 +1,7 @@
 'use strict'
 
 angular.module('todoApp')
-  .factory 'Auth', Auth = ($location, $rootScope, Session, User, $cookieStore) ->
-    
+  .factory 'Auth', ['$location', '$rootScope', 'Session', 'User', '$cookieStore', ($location, $rootScope, Session, User, $cookieStore) ->
     # Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') or null
     $cookieStore.remove 'user'
@@ -97,3 +96,4 @@ angular.module('todoApp')
     isLoggedIn: ->
       user = $rootScope.currentUser
       !!user
+  ]

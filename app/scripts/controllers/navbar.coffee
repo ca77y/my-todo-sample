@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('todoApp')
-  .controller 'NavbarCtrl', ($scope, $location, Auth) ->
+  .controller 'NavbarCtrl', ['$scope', '$location', 'Auth', ($scope, $location, Auth) ->
     $scope.menu = [
       title: 'Settings'
       link: '/settings'
@@ -16,3 +16,4 @@ angular.module('todoApp')
     
     $scope.isActive = (route) ->
       route is $location.path()
+  ]

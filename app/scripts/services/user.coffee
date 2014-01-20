@@ -1,7 +1,7 @@
 "use strict"
 
 angular.module("todoApp")
-  .factory "User", ($resource) ->
+  .factory "User", ['$resource', ($resource) ->
     $resource "/api/users/:id",
       id: "@id"
     ,
@@ -13,4 +13,4 @@ angular.module("todoApp")
         method: "GET"
         params:
           id: "me"
-
+  ]

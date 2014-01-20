@@ -73,4 +73,18 @@ angular.module('todoApp')
       $scope.sorting.priority.ascending = !$scope.sorting.priority.ascending
       $scope.sorting.predicate = "priority"
       $scope.sorting.reverse = $scope.sorting.priority.ascending
+
+    $scope.editTodo = (todo) ->
+      $scope.model.editTodo = todo
+      $scope.model.originalTodo = angular.copy todo
+
+    $scope.cancelEdit = (todo) ->
+      $scope.model.todos[$scope.model.todos.indexOf(todo)] = $scope.model.originalTodo
+      $scope.model.editTodo = null
+      $scope.model.originalTodo = null
+
+    $scope.saveEdit = (todo) ->
+      $scope.model.editTodo = null
+      $scope.model.originalTodo = null
+      $scope.updateTodo todo
   ]

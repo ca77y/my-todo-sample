@@ -2,11 +2,13 @@
     <section id="todoapp">
         <header id="header">
             <div id="sorting">
-                <button class="btn btn-sm due-date" ng-click="sortByDate()"><i class="glyphicon"
-                                                                               ng-class="{'glyphicon-chevron-up': sorting.date.ascending, 'glyphicon-chevron-down': !sorting.date.ascending}"></i>
+                <button class="btn btn-sm due-date" ng-click="sortByDate()">
+                    <i class="glyphicon"
+                       ng-class="{'glyphicon-chevron-up': sorting.date.ascending, 'glyphicon-chevron-down': !sorting.date.ascending}"></i>
                 </button>
-                <button class="btn btn-sm priority" ng-click="sortByPriority()"><i class="glyphicon"
-                                                                                   ng-class="{'glyphicon-chevron-up': sorting.priority.ascending, 'glyphicon-chevron-down': !sorting.priority.ascending}"></i>
+                <button class="btn btn-sm priority" ng-click="sortByPriority()">
+                    <i class="glyphicon"
+                       ng-class="{'glyphicon-chevron-up': sorting.priority.ascending, 'glyphicon-chevron-down': !sorting.priority.ascending}"></i>
                 </button>
             </div>
             <form id="todo-form" role="form" ng-submit="addTodo()">
@@ -19,10 +21,10 @@
         <section id="main">
             <ul id="todo-list">
                 <li ng-repeat="todo in model.todos | orderBy:sorting.predicate:sorting.reverse"
-                    ng-class="{completed: todo.completed}">
+                    ng-class="{completed: todo.completed, editing: todo == model.editTodo}">
                     <div class="view">
                         <input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="updateTodo(todo)">
-                        <label ng-bind="todo.name"></label>
+                        <label ng-bind="todo.name" ng-dblclick="editTodo(todo)"></label>
                         <div class="due-date">
                             <div class="input-group">
                                 <input type="text" class="form-control" datepicker-popup="{{datepicker.format}}"
@@ -47,6 +49,10 @@
                         </div>
                         <button class="destroy" ng-click="deleteTodo(todo)"></button>
                     </div>
+                    <form ng-submit="saveEdit(todo)">
+                        <input class="edit" ng-class="{editing: todo == model.editTodo}" ng-trim="false"
+                               ng-model="todo.name" ng-blur="saveEdit(todo)"/>
+                    </form>
                 </li>
             </ul>
         </section>
